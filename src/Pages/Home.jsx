@@ -22,7 +22,6 @@ const Home = () => {
         }
       })
       .then(films => {
-        console.log(films.results);
         setFilms(films.results);
       })
       .catch(err => console.error(err));

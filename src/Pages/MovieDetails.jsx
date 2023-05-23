@@ -1,9 +1,14 @@
+import { useRef } from 'react';
 import { useEffect, useState } from 'react';
-import { Outlet, Link, useParams } from 'react-router-dom';
+import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
+import { Suspense } from 'react';
 
 const MovieDetails = () => {
   const [filmInf, setFilmInf] = useState(null);
+  const location = useLocation();
+  const backLinLocationRef = useRef(location.state?.from ?? '/movies');
 
+  // --- ДЕСТРУКТУРИЗАЦІЯ ---
   const { movieId } = useParams();
   useEffect(() => {
     const options = {
@@ -23,7 +28,6 @@ const MovieDetails = () => {
         }
       })
       .then(film => {
-        console.log(film);
         setFilmInf(film);
       })
       .catch(err => console.error(err));
@@ -31,6 +35,7 @@ const MovieDetails = () => {
 
   return (
     <div>
+      <Link to={backLinLocationRef.current}>Back to films list</Link>
       {filmInf && (
         <>
           <p>{filmInf.title}</p>
@@ -43,7 +48,9 @@ const MovieDetails = () => {
               <Link to="reviews">Reviews</Link>
             </li>
           </ul>
-          <Outlet />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
         </>
       )}
     </div>
