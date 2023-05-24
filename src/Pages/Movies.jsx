@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react';
 import SearchBox from 'components/SearchBox/SearchBox';
 import FilmsList from 'components/FilmsList/FilmsList';
-import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
   const [films, setFilms] = useState(null);
   const [value, setValue] = useState('');
   const [page, setPage] = useState(1);
+  // ---- ВИКОРИСТОВУЮ ХУК ЮССЬОРЧПАРАМС ----
+  // ---- setSearchParams ПЕРЕЗАПИСУЄ РЯДОК ПАРАМЕТРІВ ЗАПИТУ ----
+  // ---- searchParams ЩОБ ПОЛУЧИТИ ЗНАЧЕННЯ QUERY STRING ПАРАМЕТРІВ (МЕТОД get())----
   const [searchParams, setSearchParams] = useSearchParams();
+  // const params = useMemo(
+  //   () => Object.fromEntries([...searchParams]),
+  //   [searchParams]
+  // );
+
   const urlValue = searchParams.get('query') ?? '';
-  // const navigate = useNavigate();
 
   // ---FETCH-REQUEST---
   //--- РОБЛЮ ЗАПИТ З QUERY STRING ПАРАМЕТРІВ ---
@@ -49,9 +55,11 @@ const Movies = () => {
   }, [value, page, urlValue]);
 
   const handleSubmit = value => {
+    //---- ЗМІНЮЮ  QUERY STRING- КЛАДУ ОБЄКТ ПАРАМЕТРІВ ПРИ ПОДІІ SUBMIT----
+    const nextParams = value !== '' ? { query: value } : {};
+    setSearchParams(nextParams);
     setValue(value);
     setFilms(null);
-    // navigate(`/movies/name=${value}`);
   };
 
   // == Return ==

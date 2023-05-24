@@ -1,18 +1,11 @@
-import { Wrapper, Form, Btn, Input } from './SearchBox.styled';
+import { Form, Btn, Input } from './SearchBox.styled';
 import { ReactComponent as SearchIcon } from '../icons/search.svg';
-import { useState, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
+
+// import { useSearchParams } from 'react-router-dom';
 
 const SearchBox = ({ onSubmit }) => {
   const [value, setValue] = useState('');
-  // ---- ВИКОРИСТОВУЮ ХУК ЮССЬОРЧПАРАМС ----
-  // ---- setSearchParams ПЕРЕЗАПИСУЄ РЯДОК ПАРАМЕТРІВ ЗАПИТУ ----
-  // ---- searchParams ЩОБ ПОЛУЧИТИ ЗНАЧЕННЯ QUERY STRING ПАРАМЕТРІВ (МЕТОД get())----
-  const [searchParams, setSearchParams] = useSearchParams();
-  // const params = useMemo(
-  //   () => Object.fromEntries([...searchParams]),
-  //   [searchParams]
-  // );
 
   // == Input change ==
   const handleInputChange = event => {
@@ -26,15 +19,12 @@ const SearchBox = ({ onSubmit }) => {
       alert('Please write something');
       return;
     }
-    //---- ЗМІНЮЮ  QUERY STRING- КЛАДУ ОБЄКТ ПАРАМЕТРІВ ПРИ ПОДІІ SUBMIT----
-    const nextParams = value !== '' ? { query: value } : {};
-    setSearchParams(nextParams);
     onSubmit(value);
     setValue('');
   };
   // == Return ==
   return (
-    <Wrapper>
+    <div>
       <Form onSubmit={handleSubmit}>
         <Btn type="submit">
           <SearchIcon />
@@ -43,12 +33,12 @@ const SearchBox = ({ onSubmit }) => {
           type="text"
           autoComplete="off"
           autoFocus
-          placeholder="Search films"
+          placeholder="Search movies"
           value={value}
           onChange={e => handleInputChange(e)}
         />
       </Form>
-    </Wrapper>
+    </div>
   );
 };
 export default SearchBox;

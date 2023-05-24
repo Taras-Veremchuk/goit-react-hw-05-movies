@@ -1,9 +1,10 @@
+import { Ul, Li, Img } from './CastInfo.styled';
 const CastInfo = ({ casts }) => {
   return (
-    <ul>
+    <Ul>
       {casts.map(({ id, name, profile_path }) => (
-        <li key={id}>
-          <img
+        <Li key={id}>
+          <Img
             src={
               profile_path
                 ? `https://image.tmdb.org/t/p/w500/${profile_path}`
@@ -14,9 +15,9 @@ const CastInfo = ({ casts }) => {
             height="auto"
           />
           {name}
-        </li>
+        </Li>
       ))}
-    </ul>
+    </Ul>
   );
 };
 export default CastInfo;

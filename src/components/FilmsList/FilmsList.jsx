@@ -1,22 +1,18 @@
-import { useLocation } from 'react-router-dom';
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { Link, useLocation } from 'react-router-dom';
 import 'react-circular-progressbar/dist/styles.css';
-import { CardWrapper, Container, List, Link } from './FilmList.styled';
+import { Movie, Container, Gallery, Img, Title } from './FilmList.styled';
 
-const FilmsList = ({ films }) => {
-  console.log(films);
+const FilmsList = ({ films, title }) => {
+  // console.log(films);
   const location = useLocation();
   return (
     <Container>
-      <List>
-        {films.map(({ id, title, poster_path, release_date }) => (
-          <CardWrapper key={id}>
-            {/* <div style={{ width: 50, height: 50 }}>
-            <CircularProgressbar value={66} />
-          </div> */}
-            <Link to={`/movies/${id}`} state={{ from: location }}>
-              <div>
-                <img
+      <Gallery>
+        {films.length > 0 &&
+          films.map(({ id, title, poster_path, release_date }) => (
+            <Movie key={id}>
+              <Link to={`/movies/${id}`} state={{ from: location }}>
+                <Img
                   src={
                     poster_path
                       ? `https://image.tmdb.org/t/p/w500/${poster_path}`
@@ -25,12 +21,11 @@ const FilmsList = ({ films }) => {
                   alt={title}
                   width="100%"
                 />
-              </div>
-              {title}
-            </Link>
-          </CardWrapper>
-        ))}
-      </List>
+                <Title>{title}</Title>
+              </Link>
+            </Movie>
+          ))}
+      </Gallery>
     </Container>
   );
 };

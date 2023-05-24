@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
+import MovieInf from 'components/MovieInf/MovieInf';
+import { Button, H3, UL, LI } from '../components/MovieInf/MovieInf.styled';
 
 const MovieDetails = () => {
   const [filmInf, setFilmInf] = useState(null);
@@ -28,6 +30,7 @@ const MovieDetails = () => {
         }
       })
       .then(film => {
+        console.log(film);
         setFilmInf(film);
       })
       .catch(err => console.error(err));
@@ -35,19 +38,23 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={backLinLocationRef.current}>Back to films list</Link>
+      <Link to={backLinLocationRef.current}>
+        <Button type="button"> Go back</Button>
+      </Link>
       {filmInf && (
         <>
-          <p>{filmInf.title}</p>
-          <h3>Additional Information</h3>
-          <ul>
-            <li>
-              <Link to="cast">Cast</Link>
-            </li>
-            <li>
-              <Link to="reviews">Reviews</Link>
-            </li>
-          </ul>
+          <MovieInf film={filmInf} />
+          <div>
+            <H3>Additional Information</H3>
+            <UL>
+              <LI>
+                <Link to="cast">Cast</Link>
+              </LI>
+              <LI>
+                <Link to="reviews">Reviews</Link>
+              </LI>
+            </UL>
+          </div>
           <Suspense fallback={<div>Loading...</div>}>
             <Outlet />
           </Suspense>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import FilmsList from 'components/FilmsList/FilmsList';
 
 const Home = () => {
-  const [films, setFilms] = useState(null);
+  const [trendingFilms, setTrendingFilms] = useState(null);
   // ---FETCH-REQUEST---
   useEffect(() => {
     const options = {
@@ -22,11 +22,11 @@ const Home = () => {
         }
       })
       .then(films => {
-        setFilms(films.results);
+        setTrendingFilms(films.results);
       })
       .catch(err => console.error(err));
   }, []);
 
-  return films && <FilmsList films={films} />;
+  return trendingFilms && <FilmsList films={trendingFilms} />;
 };
 export default Home;
