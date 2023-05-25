@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 const Movies = () => {
   const [films, setFilms] = useState(null);
   const [value, setValue] = useState('');
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   // ---- ВИКОРИСТОВУЮ ХУК ЮССЬОРЧПАРАМС ----
   // ---- setSearchParams ПЕРЕЗАПИСУЄ РЯДОК ПАРАМЕТРІВ ЗАПИТУ ----
   // ---- searchParams ЩОБ ПОЛУЧИТИ ЗНАЧЕННЯ QUERY STRING ПАРАМЕТРІВ (МЕТОД get())----
