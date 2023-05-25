@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
+export const Link = styled(NavLink)`
+  color: black;
+  font-size: 22px;
+  text-decoration: none;
+  font-weight: 500;
+  &.active {
+    color: orangered;
+  }
+`;
 
 export const Container = styled.div`
   display: flex;
-  ${
-    '' /* gap: 15px,
-    max-width: 1280px,
-        padding-left: 32px,
-    padding-right: 32px,
-        margin-left: auto;
-    margin-right: auto; */
-  }
 `;
 export const Img = styled.img`
   width: 300px;
@@ -43,6 +45,9 @@ export const H3 = styled.h3`
   line-height: 1.33;
   margin-bottom: 10px;
 `;
+export const AdInf = styled.div`
+  text-align: center;
+`;
 export const Text = styled.p`
   font-weight: 400;
   font-size: 16px;
@@ -57,5 +62,9 @@ export const UL = styled.ul`
   margin-top: 20px;
 `;
 export const LI = styled.li`
+border: 1px solid red
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.33;
   margin-bottom: 10px;
 `;

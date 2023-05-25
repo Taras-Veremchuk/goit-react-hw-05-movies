@@ -1,9 +1,16 @@
 import { useRef } from 'react';
 import { useEffect, useState } from 'react';
-import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
 import MovieInf from 'components/MovieInf/MovieInf';
-import { Button, H3, UL, LI } from '../components/MovieInf/MovieInf.styled';
+import {
+  Button,
+  AdInf,
+  UL,
+  LI,
+  H3,
+  Link,
+} from '../components/MovieInf/MovieInf.styled';
 
 const MovieDetails = () => {
   const [filmInf, setFilmInf] = useState(null);
@@ -30,7 +37,6 @@ const MovieDetails = () => {
         }
       })
       .then(film => {
-        console.log(film);
         setFilmInf(film);
       })
       .catch(err => console.error(err));
@@ -44,7 +50,7 @@ const MovieDetails = () => {
       {filmInf && (
         <>
           <MovieInf film={filmInf} />
-          <div>
+          <AdInf>
             <H3>Additional Information</H3>
             <UL>
               <LI>
@@ -54,7 +60,7 @@ const MovieDetails = () => {
                 <Link to="reviews">Reviews</Link>
               </LI>
             </UL>
-          </div>
+          </AdInf>
           <Suspense fallback={<div>Loading...</div>}>
             <Outlet />
           </Suspense>

@@ -1,8 +1,7 @@
 import { Form, Btn, Input } from './SearchBox.styled';
 import { ReactComponent as SearchIcon } from '../icons/search.svg';
 import { useState } from 'react';
-
-// import { useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const SearchBox = ({ onSubmit }) => {
   const [value, setValue] = useState('');
@@ -42,3 +41,6 @@ const SearchBox = ({ onSubmit }) => {
   );
 };
 export default SearchBox;
+SearchBox.propTypes = {
+  onSubmit: PropTypes.func,
+};

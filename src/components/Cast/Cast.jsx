@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CastInfo from 'components/CastInfo/CastInfo';
+import CastInfo from 'components/Cast/CastInfo';
+import { Text } from './CastInfo.styled';
 
 const Cast = () => {
-  const [casts, setCasts] = useState(null);
+  const [casts, setCasts] = useState([]);
   const { movieId } = useParams();
   useEffect(() => {
     const options = {
@@ -29,6 +30,10 @@ const Cast = () => {
       .catch(err => console.error(err));
   }, [movieId]);
 
-  return casts && <CastInfo casts={casts} />;
+  return casts.length > 0 ? (
+    <CastInfo casts={casts} />
+  ) : (
+    <Text>There are not casts</Text>
+  );
 };
 export default Cast;

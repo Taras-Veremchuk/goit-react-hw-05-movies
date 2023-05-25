@@ -1,4 +1,6 @@
 import { Ul, Li, Img } from './CastInfo.styled';
+import PropTypes from 'prop-types';
+
 const CastInfo = ({ casts }) => {
   return (
     <Ul>
@@ -21,3 +23,6 @@ const CastInfo = ({ casts }) => {
   );
 };
 export default CastInfo;
+CastInfo.propTypes = {
+  casts: PropTypes.array,
+};

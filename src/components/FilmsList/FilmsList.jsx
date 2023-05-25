@@ -1,15 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
 import 'react-circular-progressbar/dist/styles.css';
 import { Movie, Container, Gallery, Img, Title } from './FilmList.styled';
-
-const FilmsList = ({ films, title }) => {
-  // console.log(films);
+import PropTypes from 'prop-types';
+const FilmsList = ({ films }) => {
   const location = useLocation();
   return (
     <Container>
       <Gallery>
         {films.length > 0 &&
-          films.map(({ id, title, poster_path, release_date }) => (
+          films.map(({ id, title, poster_path }) => (
             <Movie key={id}>
               <Link to={`/movies/${id}`} state={{ from: location }}>
                 <Img
@@ -30,3 +29,6 @@ const FilmsList = ({ films, title }) => {
   );
 };
 export default FilmsList;
+FilmsList.propTypes = {
+  films: PropTypes.array,
+};

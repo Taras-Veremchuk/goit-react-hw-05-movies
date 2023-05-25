@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ReviewsInfo from 'components/ReviewsInfo/ReviewsInfo';
+import ReviewsInfo from 'components/Reviews/ReviewsInfo';
+import { Text } from './ReviewsInfo.styled.jsx';
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
   useEffect(() => {
     const options = {
@@ -23,17 +24,16 @@ const Reviews = () => {
           return response.json();
         }
       })
-      .then(reviews => {
-        // console.log(reviews.results);
-        setReviews(reviews.results);
+      .then(data => {
+        setReviews(data.results);
       })
       .catch(err => console.error(err));
   }, [movieId]);
 
-  return reviews ? (
+  return reviews.length > 0 ? (
     <ReviewsInfo reviews={reviews} />
   ) : (
-    <p>There are not reviews</p>
+    <Text>There are not reviews</Text>
   );
 };
 export default Reviews;
