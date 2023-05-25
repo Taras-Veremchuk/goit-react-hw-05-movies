@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 const MovieInf = ({ film }) => {
   const { title, poster_path, vote_average, overview, genres, release_date } =
     film;
-  console.log(film);
   return (
     <Container>
       <Img
