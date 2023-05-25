@@ -3,8 +3,7 @@ import { Container, Img, Title, H3, Text } from './MovieInf.styled';
 import PropTypes from 'prop-types';
 
 const MovieInf = ({ film }) => {
-  const { title, poster_path, vote_average, overview, genres, release_date } =
-    film;
+  const { title, poster_path, vote_average, overview, genres } = film;
   return (
     <Container>
       <Img
